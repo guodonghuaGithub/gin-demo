@@ -1,0 +1,15 @@
+{
+  "app_name": "demo",
+  "app_port": "9002",
+  "app_host": "localhost",
+  "app_model": "debug",
+  "database": {
+    "driver": "mysql",
+    "user": "root",
+    "password": "root",
+    "port": "8889",
+    "host": "127.0.0.1",
+    "db_name": "activity",
+    "charts": "utf8"
+  }
+}
