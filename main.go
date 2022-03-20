@@ -20,5 +20,8 @@ func main() {
 
 //注册路由
 func RegisterRout(engine *gin.Engine) {
+	engine.NoRoute(func(context *gin.Context) { //404 全局
+		tool.NotFound(context)
+	})
 	new(controller.UserController).Router(engine.Group("/user"))
 }
