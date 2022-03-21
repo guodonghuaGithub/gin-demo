@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//note https://www.bilibili.com/video/BV1Fy4y117jJ?p=14 视频课程
 func main() {
 	cfg, err := tool.ParseConfig("./config/config.json")
 	if err != nil {
