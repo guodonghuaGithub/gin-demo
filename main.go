@@ -2,7 +2,9 @@ package main
 
 import (
 	"awesomeProject/controller"
+	"awesomeProject/middlewares"
 	"awesomeProject/tool"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,11 +12,18 @@ import (
 func main() {
 	cfg, err := tool.ParseConfig("./config/config.json")
 	if err != nil {
-		//panic(err)
+		//tool.Failed(ctx *gin.Context, "初始化失败")
+		fmt.Println("初始化失败")
+		return
 	}
-	//new数据库
-	tool.GormEngine(cfg)
 	engine := gin.Default()
+	//初始化session
+	tool.InitSession(engine)
+	//初始化数据库
+	tool.GormEngine(cfg)
+	//设置全局跨域
+	engine.Use(middlewares.CoreHadle())
+	//注册路由
 	RegisterRout(engine)
 	engine.Run(cfg.AppHost + ":" + cfg.AppPort)
 }
