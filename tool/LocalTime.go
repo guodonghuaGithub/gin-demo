@@ -1,20 +1,11 @@
-package model
+package tool
 
 import (
 	"database/sql/driver"
 	"fmt"
-	"reflect"
 	"strconv"
 	"time"
 )
-
-type User struct {
-	Id       int64  `gorm:primary_key column:"id"`
-	Username string `gorm:varchar(11) column:"username"`
-	Password string `gorm:varchar(11) column:"password"`
-	Status   int64  `gorm:tinyint(2) column:"status"`
-	Ctime    LocalTime
-}
 
 type LocalTime struct {
 	time.Time
@@ -41,8 +32,4 @@ func (t *LocalTime) Scan(v interface{}) error {
 		return nil
 	}
 	return fmt.Errorf("can not convert %v to timestamp", v)
-}
-
-func (x User) IsStructureEmpty() bool {
-	return reflect.DeepEqual(x, User{})
 }

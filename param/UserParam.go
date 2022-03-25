@@ -1,7 +1,10 @@
 package param
 
-type UserParam struct {
-	UserName string `json:"username"`
-	PassWord string `json:"password"`
-	Id       string `json:"id"`
+type Users struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
+
+type UserModify struct {
+	NewPassword string `json:"new_password"`
 }

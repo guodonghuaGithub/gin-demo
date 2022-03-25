@@ -21,12 +21,14 @@ func Success(ctx *gin.Context, v interface{}) {
 		"message": "请求成功",
 		"data":    v,
 	})
+	return
+
 }
 
 func Failed(ctx *gin.Context, v interface{}) {
 	ctx.JSON(http.StatusOK, map[string]interface{}{
 		"code":    CODE_0,
-		"message": "接口异常",
+		"message": v,
 	})
 }
 
@@ -35,4 +37,5 @@ func NotFound(ctx *gin.Context) {
 		"code":    CODE_404,
 		"message": "找不到地址",
 	})
+	return
 }

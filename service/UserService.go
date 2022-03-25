@@ -2,27 +2,36 @@ package service
 
 import (
 	"awesomeProject/dao"
+	"awesomeProject/encryption"
 	"awesomeProject/model"
-	"awesomeProject/param"
 	"awesomeProject/tool"
 )
 
 type UserService struct {
 }
 
-func (user *UserService) Login(LoginParams param.UserParam) *model.User {
+func (user *UserService) Login(LoginParams model.GetParams) *model.Users {
 	db := dao.UserDao{tool.DbEngine}
-	params := model.User{}
-	params.Username = LoginParams.UserName
-	params.Password = LoginParams.PassWord
-	//if params.IsStructureEmpty() { // 括号不能去
-	//
-	//}
-
+	LoginParams.Password = encryption.Md5(LoginParams.Password)
+	find := db.Query(LoginParams.Username, LoginParams.Password)
+	if find != nil {
+		return find
+	}
 	//如果不存在直接添加该账号
-	params.Id = db.Inserts(params)
-	if params.Id <= 0 {
+	result := db.Inserts(LoginParams)
+	if result == nil{
 		return nil
 	}
-	return &params
+	return result
+
+}
+
+//更新数据
+func (user *UserService) Modify(modify model.UpdateUserParams) bool {
+	db := dao.UserDao{tool.DbEngine}
+	result := db.ModifyData(modify)
+	if result == false {
+		return false
+	}
+	return true
 }

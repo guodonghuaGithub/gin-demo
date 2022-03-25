@@ -1,10 +1,12 @@
 package controller
 
 import (
-	"awesomeProject/param"
+	"awesomeProject/model"
 	"awesomeProject/service"
 	"awesomeProject/tool"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin/binding"
 )
 
 type UserController struct {
@@ -12,13 +14,13 @@ type UserController struct {
 
 func (user *UserController) Router(engine *gin.RouterGroup) {
 	engine.GET("/login", user.Login)
+	engine.POST("/modify", user.Modify)
 }
 
 func (user *UserController) Login(c *gin.Context) {
-	var UserParam param.UserParam                  //定义参数绑定
-	err := tool.Decode(c.Request.Body, &UserParam) //接收机参数
+	var UserParam model.GetParams //定义参数绑定
+	err := c.BindJSON(&UserParam) //接收机参数
 	if err != nil {
-
 		tool.Failed(c, "参数解析失败")
 		return
 	}
@@ -29,4 +31,21 @@ func (user *UserController) Login(c *gin.Context) {
 		return
 	}
 	tool.Success(c, result)
+}
+
+func (user *UserController) Modify(ctx *gin.Context) {
+	var UserParams model.UpdateUserParams
+	err := ctx.ShouldBindBodyWith(&UserParams, binding.JSON)
+	if err != nil {
+		fmt.Println(err.Error())
+		tool.Failed(ctx, "参数解析失败")
+		return
+	}
+	service := service.UserService{}
+	result := service.Modify(UserParams)
+	if result == false {
+		tool.Failed(ctx, "更新失败")
+		return
+	}
+	tool.Success(ctx, "更新成功")
 }
