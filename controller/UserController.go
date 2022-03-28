@@ -4,6 +4,7 @@ import (
 	"awesomeProject/model"
 	"awesomeProject/service"
 	"awesomeProject/tool"
+	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -17,6 +18,7 @@ func (user *UserController) Router(engine *gin.RouterGroup) {
 	engine.POST("/modify", user.Modify)
 }
 
+//le%NU*lx5(kh
 func (user *UserController) Login(c *gin.Context) {
 	var UserParam model.GetParams //定义参数绑定
 	err := c.BindJSON(&UserParam) //接收机参数
@@ -30,6 +32,8 @@ func (user *UserController) Login(c *gin.Context) {
 		tool.Failed(c, result)
 		return
 	}
+	value, _ := json.Marshal(result)
+	tool.SetSession(c, "user_"+string(result.Id), value)
 	tool.Success(c, result)
 }
 

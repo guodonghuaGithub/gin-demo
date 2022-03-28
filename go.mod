@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/boj/redistore v0.0.0-20180917114910-cd5dcc76aeff // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/garyburd/redigo v1.6.3 // indirect
 	github.com/gin-contrib/sessions v0.0.4 // indirect

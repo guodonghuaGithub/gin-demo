@@ -18,7 +18,7 @@ func main() {
 	}
 	engine := gin.Default()
 	//初始化session
-	//tool.InitSession(engine)
+	tool.InitSession(engine)
 	//初始化数据库
 	tool.GormEngine(cfg)
 	//设置全局跨域
