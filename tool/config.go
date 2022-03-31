@@ -13,6 +13,7 @@ type Config struct {
 	AppHost  string   `json:"app_host"`
 	AppModel string   `json:"app_model"`
 	DataBase DataBase `json:"DataBase"`
+	Jwt	Jwt `json:"jwt"`
 }
 
 type DataBase struct {
@@ -24,7 +25,11 @@ type DataBase struct {
 	DbName   string `json:"db_name"`
 	Charts   string `json:"charts"`
 }
+type Jwt struct{
+  Search string `json:"search"`
+  Issuer string `json:"issuer"`
 
+}
 var _Cfg *Config = nil
 
 func ParseConfig(path string) (*Config, error) {

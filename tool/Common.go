@@ -25,9 +25,9 @@ func Success(ctx *gin.Context, v interface{}) {
 
 }
 
-func Failed(ctx *gin.Context, v interface{}) {
+func Failed(ctx *gin.Context,code int64, v interface{}) {
 	ctx.JSON(http.StatusOK, map[string]interface{}{
-		"code":    CODE_0,
+		"code":    code,
 		"message": v,
 	})
 }

@@ -2,7 +2,7 @@ package jwt
 
 import (
 	"github.com/gin-gonic/gin"
-	"test/tool"
+	"awesomeProject/tool"
 )
 
 func Auth() gin.HandlerFunc {

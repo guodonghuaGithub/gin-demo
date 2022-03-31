@@ -1,9 +1,10 @@
 package jwt
 
-import "gihtub.com/dgrijalva/jwt-go"
+import "github.com/dgrijalva/jwt-go"
 
-type MyClaims struct{
- Id int64 `json:"id"`
- jwt.StandardClaims
-
+//定义jwt的结构体
+type MyClaims struct {
+	Id int64 `json:"id"`
+	jwt.StandardClaims
 }
+

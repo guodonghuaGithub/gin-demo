@@ -3,6 +3,7 @@ package main
 import (
 	"awesomeProject/controller"
 	"awesomeProject/middlewares"
+	"awesomeProject/route"
 	"awesomeProject/tool"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -12,7 +13,6 @@ import (
 func main() {
 	cfg, err := tool.ParseConfig("./config/config.json")
 	if err != nil {
-		//tool.Failed(ctx *gin.Context, "初始化失败")
 		fmt.Println("初始化失败")
 		return
 	}
@@ -25,6 +25,6 @@ func main() {
 	//设置全局跨域
 	engine.Use(middlewares.CoreHadle())
 	//注册路由
-	route.LoadInit(engine)
+	route.LoadRoute(engine)
 	engine.Run(cfg.AppHost + ":" + cfg.AppPort)
 }

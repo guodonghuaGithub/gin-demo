@@ -1,13 +1,14 @@
 package jwt
 
+//awesomeProject/tool"
 import (
 	"errors"
 	"github.com/dgrijalva/jwt-go"
-	"test/tool"
+    	"awesomeProject/tool"
 	"time"
 )
 
-var _cfg = tool.Congig{}
+var _cfg = tool.Config{}
 
 const TokenExpireDuration = time.Hour * 2
 

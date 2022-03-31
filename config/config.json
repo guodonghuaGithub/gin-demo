@@ -11,5 +11,9 @@
     "host": "127.0.0.1",
     "db_name": "activity",
     "charts": "utf8"
-  }
+  },
+ "jwt":{
+   "search":"woshinidie",
+   "issuer":"guodonghua"
+ }
 }
