@@ -18,20 +18,13 @@ func main() {
 	}
 	engine := gin.Default()
 	//初始化session
-	tool.InitSession(engine)
+	//tool.InitSession(engine)
 	//初始化数据库
 	tool.GormEngine(cfg)
+	//
 	//设置全局跨域
 	engine.Use(middlewares.CoreHadle())
 	//注册路由
-	RegisterRout(engine)
+	route.LoadInit(engine)
 	engine.Run(cfg.AppHost + ":" + cfg.AppPort)
-}
-
-//注册路由
-func RegisterRout(engine *gin.Engine) {
-	engine.NoRoute(func(context *gin.Context) { //404 全局
-		tool.NotFound(context)
-	})
-	new(controller.UserController).Router(engine.Group("/user"))
 }

@@ -12,7 +12,7 @@ type SessionStore struct {
 }
 
 func InitSession(engine *gin.Engine) {
-	store, err := redis.NewStore(10, "tcp", "localhost:6379", "", []byte("secret"))
+	store, err := redis.NewStore(10, "tcp", "localhost:6379", "123456", []byte("secret"))
 	fmt.Println(store)
 	if err != nil {
 		fmt.Println(err.Error())

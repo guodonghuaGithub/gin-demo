@@ -1,10 +1,10 @@
 package controller
 
 import (
+	"awesomeProject/middlewares/jwt"
 	"awesomeProject/model"
 	"awesomeProject/service"
 	"awesomeProject/tool"
-	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/gin-gonic/gin/binding"
@@ -32,8 +32,12 @@ func (user *UserController) Login(c *gin.Context) {
 		tool.Failed(c, result)
 		return
 	}
-	value, _ := json.Marshal(result)
-	tool.SetSession(c, "user_"+string(result.Id), value)
+	jwt := jwt.jWT{}
+	tokenString,err := jwt.GenerateToken(result.ID)
+	if tokenString == ""{
+	   tool.Failed(c,-1,"token创建失败")
+	   return	
+	}
 	tool.Success(c, result)
 }
 
@@ -53,3 +57,4 @@ func (user *UserController) Modify(ctx *gin.Context) {
 	}
 	tool.Success(ctx, "更新成功")
 }
+
