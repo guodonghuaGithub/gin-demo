@@ -1,12 +1,12 @@
 package main
 
 import (
-	"awesomeProject/controller"
 	"awesomeProject/middlewares"
 	"awesomeProject/route"
 	"awesomeProject/tool"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"awesomeProject/middlewares/logger"
 )
 
 //note https://www.bilibili.com/video/BV1Fy4y117jJ?p=14 视频课程
@@ -17,6 +17,7 @@ func main() {
 		return
 	}
 	engine := gin.Default()
+	engine.Use(logger.LogerInit())
 	//初始化session
 	//tool.InitSession(engine)
 	//初始化数据库
@@ -26,5 +27,6 @@ func main() {
 	engine.Use(middlewares.CoreHadle())
 	//注册路由
 	route.LoadRoute(engine)
+	//初始化路由
 	engine.Run(cfg.AppHost + ":" + cfg.AppPort)
 }

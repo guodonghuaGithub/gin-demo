@@ -34,7 +34,7 @@ func (user *UserController) Login(c *gin.Context) {
 	}
 	//value, _ := json.Marshal(result)
 	//tool.SetSession(c, "user_"+string(result.Id), value)
-	tool.Success(c, result)
+	tool.Success(c, tokenString)
 }
 
 func (user *UserController) Modify(ctx *gin.Context) {
