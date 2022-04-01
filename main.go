@@ -2,11 +2,11 @@ package main
 
 import (
 	"awesomeProject/middlewares"
+	"awesomeProject/middlewares/logger"
 	"awesomeProject/route"
 	"awesomeProject/tool"
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"awesomeProject/middlewares/logger"
 )
 
 //note https://www.bilibili.com/video/BV1Fy4y117jJ?p=14 视频课程
@@ -17,7 +17,7 @@ func main() {
 		return
 	}
 	engine := gin.Default()
-	engine.Use(logger.LogerInit())
+	engine.Use(loggers.LogerInit())
 	//初始化session
 	//tool.InitSession(engine)
 	//初始化数据库
